@@ -3,6 +3,7 @@ import { getAllPosts, getPostBySlug, client } from '../../lib/sanity'
 import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
 import imageUrlBuilder from '@sanity/image-url'
+import AdUnit from '../../components/AdUnit'
 
 // Image builder for Sanity assets
 const builder = imageUrlBuilder(client)
@@ -48,6 +49,42 @@ export async function getStaticProps({ params }) {
   }
 }
 
+// Helper to automatically inject ads at specific paragraph milestones
+function injectAds(bodyBlocks) {
+  if (!bodyBlocks) return []
+  const result = []
+  let paragraphCount = 0
+
+  bodyBlocks.forEach((block, idx) => {
+    result.push(block)
+
+    // Check if the block is a standard paragraph
+    if (block._type === 'block' && (!block.style || block.style === 'normal')) {
+      paragraphCount++
+
+      // 1. Inject first ad after 3rd paragraph
+      if (paragraphCount === 3) {
+        result.push({
+          _key: `injected-ad-3-${idx}`,
+          _type: 'adPlacement',
+          slot: '1234567890' // Replace with your first ad slot ID
+        })
+      }
+      
+      // 2. Inject second ad after 8th paragraph (only for longer articles)
+      if (paragraphCount === 8) {
+        result.push({
+          _key: `injected-ad-8-${idx}`,
+          _type: 'adPlacement',
+          slot: '0987654321' // Replace with your second ad slot ID (can be the same or different)
+        })
+      }
+    }
+  })
+
+  return result
+}
+
 // Custom components to render Sanity Portable Text
 const components = {
   types: {
@@ -64,6 +101,10 @@ const components = {
         </div>
       )
     },
+    // Map custom ad block structure
+    adPlacement: ({ value }) => {
+      return <AdUnit slot={value.slot} />
+    }
   },
 }
 
@@ -71,6 +112,8 @@ export default function Article({ post }) {
   if (!post) return null
 
   const slug = post.slug?.current || post.slug
+  const bodyWithAds = injectAds(post.body)
+
   return (
     <Layout
       title={post.title}
@@ -117,7 +160,7 @@ export default function Article({ post }) {
       </div>
       
       <div className='prose prose-gray max-w-none dark:prose-invert'>
-        <PortableText value={post.body} components={components} />
+        <PortableText value={bodyWithAds} components={components} />
       </div>
     </Layout>
   )
