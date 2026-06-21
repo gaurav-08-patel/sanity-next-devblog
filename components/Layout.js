@@ -1,8 +1,11 @@
 import Link from 'next/link'
 import Head from 'next/head'
+import AdUnit from './AdUnit'
 
 export default function Layout({ children, title, description, image, canonical }) {
   const BASE = 'https://yourdomain.com'
+  const footerSlot = "6205491865";
+
   return (
     <>
       <Head>
@@ -29,9 +32,15 @@ export default function Layout({ children, title, description, image, canonical 
         </nav>
       </header>
       <main className='max-w-4xl mx-auto px-4 py-10'>{children}</main>
+
+      <div className="max-w-4xl mx-auto px-4">
+        <AdUnit slot={footerSlot} />
+      </div>
+
       <footer className='border-t border-gray-200 mt-16 py-8 text-center text-sm text-gray-500'>
         <p>Built with Next.js + Sanity</p>
       </footer>
     </>
   )
 }
+
