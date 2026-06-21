@@ -19,7 +19,7 @@ export async function getStaticPaths() {
       .map(p => ({
         params: { slug: p.slug?.current || p.slug }
       }))
-    
+
     return {
       paths,
       fallback: 'blocking',
@@ -39,9 +39,9 @@ export async function getStaticProps({ params }) {
     if (!post) {
       return { notFound: true }
     }
-    return { 
-      props: { post }, 
-      revalidate: 60 
+    return {
+      props: { post },
+      revalidate: 60
     }
   } catch (error) {
     console.error(`Error fetching post with slug "${params.slug}":`, error)
@@ -67,10 +67,10 @@ function injectAds(bodyBlocks) {
         result.push({
           _key: `injected-ad-3-${idx}`,
           _type: 'adPlacement',
-          slot: '1234567890' // Replace with your first ad slot ID
+          slot: '1646310072' // Replace with your first ad slot ID
         })
       }
-      
+
       // 2. Inject second ad after 8th paragraph (only for longer articles)
       if (paragraphCount === 8) {
         result.push({
@@ -92,11 +92,11 @@ const components = {
       if (!value?.asset) return null
       return (
         <div className='relative w-full h-64 sm:h-96 my-6 overflow-hidden rounded-lg'>
-          <Image 
-            src={urlFor(value.asset).url()} 
+          <Image
+            src={urlFor(value.asset).url()}
             alt={value.alt || 'Article image'}
-            fill 
-            className='object-cover' 
+            fill
+            className='object-cover'
           />
         </div>
       )
@@ -123,19 +123,19 @@ export default function Article({ post }) {
     >
       {post.coverImage && (
         <div className='relative h-64 sm:h-[400px] w-full mb-8 rounded-xl overflow-hidden'>
-          <Image 
-            src={post.coverImage} 
+          <Image
+            src={post.coverImage}
             alt={post.title}
-            fill 
-            className='object-cover' 
-            priority 
+            fill
+            className='object-cover'
+            priority
           />
         </div>
       )}
-      
+
       <div className='flex gap-2 mb-4 flex-wrap'>
         {post.tags?.map(tag => (
-          <span 
+          <span
             key={tag}
             className='text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full'
           >
@@ -143,22 +143,22 @@ export default function Article({ post }) {
           </span>
         ))}
       </div>
-      
+
       <h1 className='text-3xl sm:text-4xl font-bold text-gray-900 mb-3 leading-tight'>
         {post.title}
       </h1>
-      
+
       <div className='text-sm text-gray-400 mb-8'>
         {post.publishedAt
           ? new Date(post.publishedAt).toLocaleDateString(undefined, {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric'
-            })
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+          })
           : 'Draft'}{' '}
         · {post.readTime || 1} min read
       </div>
-      
+
       <div className='prose prose-gray max-w-none dark:prose-invert'>
         <PortableText value={bodyWithAds} components={components} />
       </div>
