@@ -4,7 +4,7 @@ export default function Document() {
   const adsenseClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
 
   return (
-    <Html lang="en">
+    <Html lang="en" className="dark">
       <Head>
         <script
           async
