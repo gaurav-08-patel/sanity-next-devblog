@@ -76,7 +76,7 @@ function injectAds(bodyBlocks) {
         result.push({
           _key: `injected-ad-8-${idx}`,
           _type: 'adPlacement',
-          slot: '0987654321' // Replace with your second ad slot ID (can be the same or different)
+          slot: '2328836350' // Replace with your second ad slot ID (can be the same or different)
         })
       }
     }
