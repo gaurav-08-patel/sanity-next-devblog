@@ -16,7 +16,7 @@ export default function AdUnit({ slot }) {
 
   // In development mode, if there is no client ID configured,
   // render a placeholder box so the developer can visualize ad placements.
-  if (process.env.NEXT_ENV === 'development') {
+  if (process.env.NODE_ENV === 'development') {
     return (
       <div className="my-8 p-4 border border-dashed border-gray-300 dark:border-zinc-800 rounded-lg bg-gray-50 dark:bg-zinc-900/30 text-center">
         <p className="text-xs font-mono text-gray-400 dark:text-gray-500">
