@@ -1,18 +1,25 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 export default function AdUnit({ slot }) {
   const adsenseClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID;
+  const adRef = useRef(null)
 
   useEffect(() => {
-    // Only initialize ads if we have a client ID and window.adsbygoogle is available
-    if (adsenseClientId) {
-      try {
-        (window.adsbygoogle = window.adsbygoogle || []).push({})
-      } catch (e) {
-        console.error("AdSense initialization error:", e)
+    // Only initialize ads if client ID is set and target element is mounted
+    if (adsenseClientId && adRef.current) {
+      // Check if Google has already filled the container or initialized it
+      const hasChildren = adRef.current.childNodes.length > 0;
+      const isProcessed = adRef.current.getAttribute('data-adsbygoogle-status') === 'done';
+
+      if (!hasChildren && !isProcessed) {
+        try {
+          (window.adsbygoogle = window.adsbygoogle || []).push({})
+        } catch (e) {
+          console.error("AdSense initialization error:", e)
+        }
       }
     }
-  }, [adsenseClientId])
+  }, [adsenseClientId, slot])
 
   // In development mode, if there is no client ID configured,
   // render a placeholder box so the developer can visualize ad placements.
@@ -35,6 +42,7 @@ export default function AdUnit({ slot }) {
   return (
     <div className='my-8 flex justify-center'>
       <ins
+        ref={adRef}
         className='adsbygoogle'
         style={{ display: 'block', width: '100%' }}
         data-ad-client={adsenseClientId}
