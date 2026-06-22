@@ -8,7 +8,7 @@ export async function getStaticProps() {
   try {
     const posts = await getAllPosts();
     // Take the latest 4 posts for the homepage preview
-    const featuredPosts = posts ? posts.slice(0, 4) : [];
+    const featuredPosts = posts ? posts.slice(0, 6) : [];
     return {
       props: { posts: featuredPosts },
       revalidate: 60,
