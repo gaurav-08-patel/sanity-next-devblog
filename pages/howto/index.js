@@ -66,15 +66,15 @@ export default function HowTo({ posts }) {
             canonical="/howto"
         >
             <div className="max-w-3xl">
-                <h1 className="text-[clamp(3.75rem,5vw,6.5rem)] font-extrabold tracking-[-0.06em] bg-gradient-to-r from-[var(--color-amethyst)] via-[var(--color-lavender)] to-[var(--color-white)] bg-clip-text text-transparent leading-[0.98] mb-4 drop-shadow-[0_10px_30px_rgba(124,58,237,0.22)]">
+                <h1 className="text-[clamp(3.25rem,5vw,6.5rem)] font-extrabold tracking-[-0.06em] bg-gradient-to-r from-[var(--color-amethyst)] via-[var(--color-lavender)] to-[var(--color-white)] bg-clip-text text-transparent leading-[0.98] mb-4 drop-shadow-[0_10px_30px_rgba(124,58,237,0.22)]">
                     How-To Guides
                 </h1>
-                <p className="text-[16px] md:text-[18px] text-[var(--color-medium-gray)] max-w-2xl leading-[1.8] mb-4">
+                <p className="text-[15px] md:text-[18px] text-[var(--color-medium-gray)] max-w-2xl leading-[1.5] md:leading-[1.8] mb-4">
                     Practical, step-by-step tutorials built to demystify modern
                     development workflows. These guides are designed to help you
                     move from concept to execution with confidence.
                 </p>
-                <p className="text-[16px] md:text-[18px] text-[var(--color-medium-gray)] max-w-2xl leading-[1.8] mb-6">
+                <p className="text-[15px] md:text-[18px] text-[var(--color-medium-gray)] max-w-2xl leading-[1.5] md:leading-[1.8] mb-6">
                     Whether you are learning a new tool, improving an
                     architecture pattern, or solving a specific problem, this
                     page brings together the clearest, most actionable how-to

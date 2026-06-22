@@ -66,15 +66,15 @@ export default function Tools({ posts }) {
             canonical="/tools"
         >
             <div className="max-w-3xl">
-                <h1 className="text-[clamp(3.75rem,5vw,6.5rem)] font-extrabold tracking-[-0.06em] bg-gradient-to-r from-[var(--color-amethyst)] via-[var(--color-lavender)] to-[var(--color-white)] bg-clip-text text-transparent leading-[0.98] mb-4 drop-shadow-[0_10px_30px_rgba(124,58,237,0.22)]">
+                <h1 className="text-[clamp(3.25rem,5vw,6.5rem)] font-extrabold tracking-[-0.06em] bg-gradient-to-r from-[var(--color-amethyst)] via-[var(--color-lavender)] to-[var(--color-white)] bg-clip-text text-transparent leading-[0.98] mb-4 drop-shadow-[0_10px_30px_rgba(124,58,237,0.22)]">
                     Tool Comparisons
                 </h1>
-                <p className="text-[16px] md:text-[18px] text-[var(--color-medium-gray)] max-w-2xl leading-[1.8] mb-4">
+                <p className="text-[15px] md:text-[18px] text-[var(--color-medium-gray)] max-w-2xl leading-[1.5] md:leading-[1.8] mb-4">
                     A curated collection of tool reviews, workflows, and
                     practical recommendations for builders who want faster,
                     cleaner developer experiences.
                 </p>
-                <p className="text-[16px] md:text-[18px] text-[var(--color-medium-gray)] max-w-2xl leading-[1.8] mb-6">
+                <p className="text-[15px] md:text-[18px] text-[var(--color-medium-gray)] max-w-2xl leading-[1.5] md:leading-[1.8] mb-6">
                     Here you can compare the best developer products, discover
                     hidden productivity boosters, and find the right stack for
                     real-world software projects. Every article is written to
