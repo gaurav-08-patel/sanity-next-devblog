@@ -56,7 +56,7 @@ npm start
 
 ## Overview — Pages and Features
 
-- `/` — Homepage: hero, featured posts (latest 4), and a preview of latest articles.
+- `/` — Homepage: hero, featured posts (latest 6), and a preview of latest articles.
 - `/blog` — All Articles: paginated listing of all published `article` documents (12 per page by default), search UI, and AdUnit placement.
 - `/blog/[slug]` — Article detail page: renders the article body (Portable Text) and associated metadata (title, read time, cover image).
 - `/tools` — Tool Comparisons: tag-filtered listing (`tools` tag), same layout and pagination as `/blog`.
