@@ -38,7 +38,7 @@ export default function Home({ posts }) {
             <span className="text-[12px] font-medium text-[var(--color-bright-gray)] tracking-wider">New technical deep-dives added weekly</span>
           </div>
 
-          <h1 className="text-[48px] md:text-[72px] font-bold leading-[1.05] tracking-[-1.5px] mb-6 bg-gradient-to-r from-[var(--color-amethyst)] via-[var(--color-lavender)] to-[var(--color-white)] bg-clip-text text-transparent">
+          <h1 className="text-[clamp(48px,8vw,72px)] font-bold leading-[1.05] tracking-[-1.5px] mb-6 bg-gradient-to-r from-[var(--color-amethyst)] via-[var(--color-lavender)] to-[var(--color-white)] bg-clip-text text-transparent">
             Developer Knowledge, connected.
           </h1>
 
