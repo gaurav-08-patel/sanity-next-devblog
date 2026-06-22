@@ -2,11 +2,11 @@ import Layout from '../../components/Layout'
 import { getAllPosts, getPostBySlug, client } from '../../lib/sanity'
 import { PortableText } from '@portabletext/react'
 import Image from 'next/image'
-import imageUrlBuilder from '@sanity/image-url'
+import { createImageUrlBuilder } from '@sanity/image-url'
 import AdUnit from '../../components/AdUnit'
 
 // Image builder for Sanity assets
-const builder = imageUrlBuilder(client)
+const builder = createImageUrlBuilder(client)
 function urlFor(source) {
   return builder.image(source)
 }
