@@ -1,49 +1,169 @@
-import Layout from '../../components/Layout'
-import PostCard from '../../components/PostCard'
-import SearchBar from '../../components/SearchBar'
-import { getAllPosts } from '../../lib/sanity'
+import { useState, useEffect } from "react";
+import Layout from "../../components/Layout";
+import PostCard from "../../components/PostCard";
+import SearchBar from "../../components/SearchBar";
+import AdUnit from "../../components/AdUnit";
+import { getAllPosts } from "../../lib/sanity";
+
+const POSTS_PER_PAGE = 12;
 
 export async function getStaticProps() {
-  try {
-    const posts = await getAllPosts()
-    return { 
-      props: { posts: posts || [] }, 
-      revalidate: 60 
+    try {
+        const posts = await getAllPosts();
+        return {
+            props: { posts: posts || [] },
+            revalidate: 60,
+        };
+    } catch (error) {
+        console.error("Error fetching posts:", error);
+        return {
+            props: { posts: [] },
+            revalidate: 10,
+        };
     }
-  } catch (error) {
-    console.error("Error fetching posts:", error)
-    return { 
-      props: { posts: [] }, 
-      revalidate: 10 
-    }
-  }
 }
 
 export default function Blog({ posts }) {
-  return (
-    <Layout
-      title='All Articles'
-      description='Programming tutorials for beginners'
-      canonical='/blog'
-    >
-      <h1 className='text-3xl font-bold text-gray-900 mb-2'>All Articles</h1>
-      <p className='text-gray-500 mb-8'>{posts?.length || 0} articles published</p>
-      
-      <div className="mb-8">
-        <SearchBar posts={posts} />
-      </div>
+    const [currentPage, setCurrentPage] = useState(1);
+    const totalPages = Math.max(
+        1,
+        Math.ceil((posts?.length || 0) / POSTS_PER_PAGE),
+    );
 
-      {posts?.length === 0 ? (
-        <div className="text-center py-12 border border-dashed border-gray-200 rounded-xl">
-          <p className="text-gray-400">No articles published yet.</p>
-        </div>
-      ) : (
-        <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8'>
-          {posts.map(p => (
-            <PostCard key={p.slug?.current || p.slug} post={p} />
-          ))}
-        </div>
-      )}
-    </Layout>
-  )
+    useEffect(() => {
+        if (currentPage > totalPages) {
+            setCurrentPage(totalPages);
+        }
+    }, [currentPage, totalPages]);
+
+    const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+    const pagePosts =
+        posts?.slice(startIndex, startIndex + POSTS_PER_PAGE) || [];
+
+    const showPagination = totalPages > 1;
+
+    const renderPageButtons = () => {
+        if (totalPages <= 7) {
+            return Array.from({ length: totalPages }, (_, index) => index + 1);
+        }
+
+        const pages = [1];
+        const left = Math.max(2, currentPage - 1);
+        const right = Math.min(totalPages - 1, currentPage + 1);
+
+        if (left > 2) pages.push("start-ellipsis");
+        for (let page = left; page <= right; page += 1) {
+            pages.push(page);
+        }
+        if (right < totalPages - 1) pages.push("end-ellipsis");
+        pages.push(totalPages);
+        return pages;
+    };
+
+    return (
+        <Layout
+            title="All Articles"
+            description="Browse every published DevBlog article, from evergreen tutorials to practical how-to guides."
+            canonical="/blog"
+        >
+            <div className="max-w-3xl">
+                <h1 className="text-[clamp(2.5rem,4vw,4.5rem)] font-semibold tracking-[-0.05em] text-[var(--color-bright-gray)] leading-[1.02] mb-4">
+                    All Articles
+                </h1>
+                <p className="text-[16px] md:text-[18px] text-[var(--color-medium-gray)] max-w-2xl leading-[1.8] mb-6">
+                    Discover the full archive of published content, organized
+                    for fast browsing and easy discovery. This page surfaces the
+                    latest tutorials, architecture breakdowns, tool reviews, and
+                    practical developer guides — all written to help you ship
+                    better code.
+                </p>
+            </div>
+
+            <div className="w-full max-w-full mt-6">
+                <AdUnit slot="7253061212" />
+            </div>
+
+            <div className="flex flex-col gap-6 mt-10 mb-5">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+                    <div>
+                        <p className="text-[var(--color-bright-gray)] font-bold text-xl">
+                            {posts?.length || 0} articles published
+                        </p>
+                        <p className="text-[14px] text-[var(--color-medium-gray)]">
+                            Showing up to {POSTS_PER_PAGE} articles per page.
+                        </p>
+                    </div>
+                    <SearchBar posts={posts} />
+                </div>
+
+                {pagePosts.length === 0 ? (
+                    <div className="text-center py-12 border border-dashed border-[var(--color-graphite)] rounded-xl bg-[var(--color-surface)]">
+                        <p className="text-[var(--color-medium-gray)]">
+                            No articles published yet.
+                        </p>
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        {pagePosts.map((p) => (
+                            <PostCard
+                                key={p.slug?.current || p.slug}
+                                post={p}
+                            />
+                        ))}
+                    </div>
+                )}
+            </div>
+
+            {showPagination && (
+                <div className="mt-10 flex flex-wrap items-center justify-center gap-2">
+                    <button
+                        type="button"
+                        onClick={() =>
+                            setCurrentPage((prev) => Math.max(prev - 1, 1))
+                        }
+                        className="px-4 py-2 rounded-full bg-[var(--color-surface)] text-[var(--color-bright-gray)] border border-[var(--color-graphite)] transition hover:bg-[var(--color-graphite)]/40"
+                        disabled={currentPage === 1}
+                    >
+                        Previous
+                    </button>
+
+                    {renderPageButtons().map((page) => {
+                        if (typeof page === "string") {
+                            return (
+                                <span
+                                    key={page}
+                                    className="px-3 py-2 text-[var(--color-medium-gray)]"
+                                >
+                                    …
+                                </span>
+                            );
+                        }
+                        return (
+                            <button
+                                key={page}
+                                type="button"
+                                onClick={() => setCurrentPage(page)}
+                                className={`px-4 py-2 rounded-full border transition ${page === currentPage ? "bg-[var(--color-amethyst)] text-white border-[var(--color-amethyst)]" : "bg-[var(--color-surface)] text-[var(--color-bright-gray)] border-[var(--color-graphite)] hover:bg-[var(--color-graphite)]/30"}`}
+                            >
+                                {page}
+                            </button>
+                        );
+                    })}
+
+                    <button
+                        type="button"
+                        onClick={() =>
+                            setCurrentPage((prev) =>
+                                Math.min(prev + 1, totalPages),
+                            )
+                        }
+                        className="px-4 py-2 rounded-full bg-[var(--color-surface)] text-[var(--color-bright-gray)] border border-[var(--color-graphite)] transition hover:bg-[var(--color-graphite)]/40"
+                        disabled={currentPage === totalPages}
+                    >
+                        Next
+                    </button>
+                </div>
+            )}
+        </Layout>
+    );
 }
