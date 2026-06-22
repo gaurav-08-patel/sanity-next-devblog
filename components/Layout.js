@@ -1,8 +1,10 @@
 import Link from 'next/link'
 import Head from 'next/head'
+import { useState } from 'react'
 import AdUnit from './AdUnit'
 
 export default function Layout({ children, title, description, image, canonical }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const BASE = 'https://yourdomain.com'
   const footerSlot = "6205491865";
 
@@ -23,7 +25,7 @@ export default function Layout({ children, title, description, image, canonical 
       </Head>
 
       <header className='sticky top-0 z-50 bg-[var(--color-abyss)] border-b border-[var(--color-graphite)]'>
-        <nav className='max-w-[1120px] mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between'>
+        <nav className='max-w-[1120px] mx-auto px-8 sm:px-12 lg:px-16 py-5 flex items-center justify-between'>
           <div className="flex items-center gap-3">
             {/* Minimalist Logo mimicking the app icon style */}
             <div className="w-8 h-8 rounded-[8px] bg-gradient-to-br from-[var(--color-amethyst)] to-[var(--color-surface)] shadow-[var(--shadow-subtle)] flex items-center justify-center">
@@ -49,19 +51,47 @@ export default function Layout({ children, title, description, image, canonical 
             </Link>
           </div>
           
-          <div className='md:hidden flex gap-4 text-sm text-[var(--color-medium-gray)]'>
-            <Link href='/blog' className='hover:text-[var(--color-bright-gray)] transition-colors'>Articles</Link>
-            <Link href='/tools' className='hover:text-[var(--color-bright-gray)] transition-colors'>Tools</Link>
+          <div className="md:hidden">
+            <button 
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-[var(--color-medium-gray)] hover:text-[var(--color-bright-gray)] focus:outline-none p-2"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </button>
           </div>
         </nav>
+
+        {/* Mobile Dropdown Menu */}
+        <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-[var(--color-surface)] ${isMobileMenuOpen ? 'max-h-[400px] opacity-100 border-t border-[var(--color-graphite)]' : 'max-h-0 opacity-0'}`}>
+          <div className="flex flex-col px-8 py-6 space-y-6">
+            <Link href='/blog' onClick={() => setIsMobileMenuOpen(false)} className='text-[18px] text-[var(--color-bright-gray)] font-medium hover:text-[var(--color-lavender)] transition-colors'>
+              Articles
+            </Link>
+            <Link href='/tools' onClick={() => setIsMobileMenuOpen(false)} className='text-[18px] text-[var(--color-bright-gray)] font-medium hover:text-[var(--color-lavender)] transition-colors'>
+              Tools
+            </Link>
+            <Link href='/howto' onClick={() => setIsMobileMenuOpen(false)} className='text-[18px] text-[var(--color-bright-gray)] font-medium hover:text-[var(--color-lavender)] transition-colors'>
+              How-To
+            </Link>
+          </div>
+        </div>
       </header>
 
-      <main className='flex-grow max-w-[1120px] mx-auto w-full px-4 sm:px-6 lg:px-8 py-12 md:py-24 flex flex-col gap-[96px]'>
+      <main className='flex-grow max-w-[1120px] mx-auto w-full px-8 sm:px-12 lg:px-16 py-12 md:py-24 flex flex-col gap-[96px]'>
         {children}
       </main>
 
       {/* AdSpace Above Footer */}
-      <div className="max-w-[1120px] mx-auto w-full px-4 sm:px-6 lg:px-8 mb-16">
+      <div className="max-w-[1120px] mx-auto w-full px-8 sm:px-12 lg:px-16 mb-16">
         <div className="bg-[var(--color-surface)] rounded-xl border border-[var(--color-graphite)] p-4 shadow-[var(--shadow-subtle)]">
           <div className="text-[10px] text-[var(--color-muted-gray)] uppercase tracking-widest mb-2 text-center">Advertisement</div>
           <AdUnit slot={footerSlot} />
@@ -69,7 +99,7 @@ export default function Layout({ children, title, description, image, canonical 
       </div>
 
       <footer className='border-t border-[var(--color-graphite)] bg-[var(--color-surface)] pt-24 pb-12'>
-        <div className="max-w-[1120px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1120px] mx-auto px-8 sm:px-12 lg:px-16">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-16">
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center gap-3 mb-6">
