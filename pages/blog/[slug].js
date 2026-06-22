@@ -91,7 +91,7 @@ const components = {
     image: ({ value }) => {
       if (!value?.asset) return null
       return (
-        <div className='relative w-full h-64 sm:h-96 my-6 overflow-hidden rounded-lg'>
+        <div className='relative w-full aspect-[16/9] my-8 overflow-hidden rounded-[12px] border border-[var(--color-graphite)]/50 bg-[var(--color-abyss)]'>
           <Image
             src={urlFor(value.asset).url()}
             alt={value.alt || 'Article image'}
@@ -121,47 +121,50 @@ export default function Article({ post }) {
       image={post.coverImage}
       canonical={`/blog/${slug}`}
     >
-      {post.coverImage && (
-        <div className='relative h-64 sm:h-[400px] w-full mb-8 rounded-xl overflow-hidden'>
-          <Image
-            src={post.coverImage}
-            alt={post.title}
-            fill
-            className='object-cover'
-            priority
-          />
+      <article className="w-full">
+        {post.coverImage && (
+          <div className='relative w-full aspect-[21/9] mb-12 rounded-[12px] overflow-hidden border border-[var(--color-graphite)]/50 bg-[var(--color-abyss)]'>
+            <Image
+              src={post.coverImage}
+              alt={post.title}
+              fill
+              className='object-cover'
+              priority
+            />
+          </div>
+        )}
+
+        <div className='flex gap-3 mb-4 flex-wrap'>
+          {post.tags?.map(tag => (
+            <span
+              key={tag}
+              className='text-[10px] uppercase font-bold tracking-widest bg-[var(--color-amethyst)]/10 border border-[var(--color-amethyst)]/30 shadow-[0_0_10px_rgba(124,58,237,0.1)] text-[var(--color-lavender)] px-3 py-1 rounded-full'
+            >
+              {tag}
+            </span>
+          ))}
         </div>
-      )}
 
-      <div className='flex gap-2 mb-4 flex-wrap'>
-        {post.tags?.map(tag => (
-          <span
-            key={tag}
-            className='text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full'
-          >
-            {tag}
-          </span>
-        ))}
-      </div>
+        <h1 className='text-[36px] sm:text-[48px] font-bold text-[var(--color-bright-gray)] tracking-[-1.5px] mb-4 leading-[1.1]'>
+          {post.title}
+        </h1>
 
-      <h1 className='text-3xl sm:text-4xl font-bold text-gray-900 mb-3 leading-tight'>
-        {post.title}
-      </h1>
+        <div className='text-[14px] text-[var(--color-medium-gray)] mb-22 flex items-center gap-2'>
+          {post.publishedAt
+            ? new Date(post.publishedAt).toLocaleDateString(undefined, {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })
+            : 'Draft'}
+          <span>&middot;</span>
+          <span>{post.readTime || 1} min read</span>
+        </div>
 
-      <div className='text-sm text-gray-400 mb-8'>
-        {post.publishedAt
-          ? new Date(post.publishedAt).toLocaleDateString(undefined, {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })
-          : 'Draft'}{' '}
-        · {post.readTime || 1} min read
-      </div>
-
-      <div className='prose prose-gray max-w-none dark:prose-invert'>
-        <PortableText value={bodyWithAds} components={components} />
-      </div>
+        <div className='prose prose-invert max-w-none prose-p:text-[var(--color-medium-gray)] prose-headings:text-[var(--color-bright-gray)] prose-a:text-[var(--color-lavender)]'>
+          <PortableText value={bodyWithAds} components={components} />
+        </div>
+      </article>
     </Layout>
   )
 }

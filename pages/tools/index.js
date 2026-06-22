@@ -25,17 +25,17 @@ export default function Tools({ posts }) {
       description='Best free tools for CS students'
       canonical='/tools'
     >
-      <h1 className='text-3xl font-bold text-gray-900 dark:text-white mb-2'>
+      <h1 className='text-[36px] font-semibold text-[var(--color-bright-gray)] tracking-[-0.72px] mb-2'>
         Tool Comparisons
       </h1>
-      <p className='text-gray-500 dark:text-gray-400 mb-8'>
+      <p className='text-[var(--color-medium-gray)] text-[16px] mb-12'>
         Honest comparisons of the best free developer tools.
       </p>
 
       {posts?.length === 0 ? (
-        <div className="text-center py-12 border border-dashed border-gray-200 dark:border-zinc-800 rounded-xl">
-          <p className="text-gray-400 dark:text-gray-500">
-            No tool articles yet — tag a Sanity article with 'tools' to see it here.
+        <div className="text-center py-20 bg-[var(--color-surface)] shadow-[var(--shadow-subtle)] rounded-[12px]">
+          <p className="text-[var(--color-medium-gray)] text-[16px] font-medium">
+            No tool articles yet &mdash; tag a Sanity article with &apos;tools&apos; to see it here.
           </p>
         </div>
       ) : (

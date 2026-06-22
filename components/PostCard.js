@@ -4,31 +4,30 @@ import Image from 'next/image'
 export default function PostCard({ post }) {
   const slug = post.slug?.current || post.slug
   return (
-    <article className='group relative flex flex-col h-full bg-slate-800/50 backdrop-blur-sm border border-blue-500/10 hover:border-blue-500/30 rounded-xl overflow-hidden hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2 transition-all duration-300'>
-
-      {/* Cover Image Container with zoom effect */}
+    <article className='group relative flex flex-col h-full bg-[var(--color-surface)] border border-transparent hover:border-[var(--color-amethyst)]/30 rounded-[12px] overflow-hidden shadow-[var(--shadow-subtle)] transition-all duration-300 hover:bg-[var(--color-graphite)]/20 hover:shadow-[0_0_30px_-5px_rgba(124,58,237,0.15)]'>
+      
+      {/* Cover Image Container */}
       {post.coverImage && (
-        <div className='relative h-48 w-full overflow-hidden bg-gradient-to-br from-slate-700 to-slate-900'>
+        <div className='relative w-full aspect-[16/9] overflow-hidden bg-[var(--color-abyss)] border-b border-[var(--color-graphite)]/50'>
           <Image
             src={post.coverImage}
             alt={post.title}
             fill
-            className='object-cover group-hover:scale-110 transition-transform duration-500'
+            className='object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-300'
             sizes='(max-width:768px) 100vw, 400px'
           />
-          <div className='absolute inset-0 bg-gradient-to-t from-black/60 to-transparent'></div>
         </div>
       )}
 
       {/* Content section */}
       <div className='flex flex-col flex-1 p-6'>
-
+        
         {/* Tags */}
-        <div className='flex gap-2 mb-3 flex-wrap'>
+        <div className='flex gap-2 mb-4 flex-wrap'>
           {post.tags?.map(tag => (
             <span
               key={tag}
-              className='text-[10px] uppercase tracking-wider font-semibold bg-blue-500/20 text-blue-300 px-2.5 py-1 rounded-full border border-blue-500/30'
+              className='text-[12px] font-medium tracking-tight bg-[#8a5cf5]/15 text-[var(--color-lavender)] px-2 py-0.5 rounded-full'
             >
               {tag}
             </span>
@@ -36,7 +35,7 @@ export default function PostCard({ post }) {
         </div>
 
         {/* Title */}
-        <h3 className='font-bold text-lg text-white mb-2 leading-snug group-hover:text-blue-300 transition-colors'>
+        <h3 className='font-bold text-[24px] text-[var(--color-bright-gray)] tracking-[-0.48px] leading-[1.33] mb-2 group-hover:text-[var(--color-white)] transition-colors'>
           <Link href={`/blog/${slug}`}>
             <span className="absolute inset-0" aria-hidden="true" />
             {post.title}
@@ -44,12 +43,12 @@ export default function PostCard({ post }) {
         </h3>
 
         {/* Description Brief */}
-        <p className='text-gray-300 text-sm line-clamp-3 mb-4 flex-1 leading-relaxed'>
+        <p className='text-[var(--color-medium-gray)] text-[16px] tracking-[-0.32px] leading-[1.5] line-clamp-3 mb-6 flex-1'>
           {post.brief}
         </p>
 
         {/* Meta details footer */}
-        <div className='flex items-center justify-between pt-4 border-t border-blue-500/10 text-xs text-gray-400 font-medium'>
+        <div className='flex items-center justify-between pt-4 border-t border-[var(--color-graphite)] text-[12px] text-[var(--color-muted-gray)] font-medium tracking-[-0.24px]'>
           <span>
             {post.publishedAt
               ? new Date(post.publishedAt).toLocaleDateString(undefined, {

@@ -24,81 +24,69 @@ export async function getStaticProps() {
 export default function Home({ posts }) {
   return (
     <Layout
-      title="DevBlog — Modern Coding Guides & Tools"
-      description="Step-by-step developer tutorials, honest tool reviews, and programming tips for software builders."
+      title="DevBlog — Developer Knowledge, connected."
+      description="Your second brain for code, tutorials, and tools."
       canonical="/"
     >
       {/* ── Hero Section ───────────────────────────────────── */}
-      <section className="py-16 md:py-24 text-center md:text-left border-b border-blue-500/10 relative overflow-hidden">
-        {/* Gradient background elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl -z-10"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl -z-10"></div>
+      <section className="py-24 md:py-32 flex flex-col items-start justify-center border-b border-[var(--color-graphite)]/50">
         
-        <div className="max-w-3xl">
-          <div className="inline-block mb-4 px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full">
-            <span className="text-blue-300 text-sm font-semibold">Welcome to DevBlog</span>
-          </div>
+        <div className="max-w-3xl flex flex-col items-start text-left">
           
-          <h1 className="text-5xl sm:text-6xl font-black tracking-tight text-white leading-tight">
-            Level up your code, <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              one article at a time.
-            </span>
+          <div className="mb-6 px-4 py-1.5 bg-[var(--color-surface)] border border-[var(--color-graphite)] rounded-full shadow-[var(--shadow-subtle)] inline-flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[var(--color-amethyst)] shadow-[0_0_8px_rgba(124,58,237,0.8)] animate-pulse"></span>
+            <span className="text-[12px] font-medium text-[var(--color-bright-gray)] tracking-wider">New technical deep-dives added weekly</span>
+          </div>
+
+          <h1 className="text-[48px] md:text-[72px] font-bold leading-[1.05] tracking-[-1.5px] mb-6 bg-gradient-to-r from-[var(--color-amethyst)] via-[var(--color-lavender)] to-[var(--color-white)] bg-clip-text text-transparent">
+            Developer Knowledge, connected.
           </h1>
 
-          <p className="mt-6 text-lg text-gray-300 leading-relaxed max-w-2xl">
-            Comprehensive, beginner-friendly programming guides, honest tool reviews, and clear how-to steps to accelerate your learning curve.
+          <p className="text-[18px] md:text-[22px] text-[var(--color-medium-gray)] font-normal leading-[1.5] tracking-[-0.32px] max-w-2xl mb-10">
+            A sharp, faceted digital space built for clarity and focus. Explore step-by-step programming guides, architecture breakdowns, and honest reviews of the best developer tools.
           </p>
 
-          <div className="mt-10 flex flex-wrap justify-center md:justify-start gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <Link
               href="/blog"
-              className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold rounded-lg shadow-lg shadow-blue-500/30 transition-all hover:-translate-y-1 duration-200"
+              className="px-6 py-3 bg-[var(--color-amethyst)] hover:bg-[#6b21a8] text-[var(--color-white)] text-[16px] font-medium rounded-[8px] transition-colors shadow-[var(--shadow-subtle)]"
             >
-              Explore Articles
+              Start Reading
             </Link>
 
             <Link
               href="/tools"
-              className="px-6 py-3 border border-blue-500/30 hover:border-blue-400/60 bg-slate-800/50 backdrop-blur-sm hover:bg-slate-800 text-gray-100 font-semibold rounded-lg transition-all hover:-translate-y-1 duration-200"
+              className="px-6 py-3 bg-[var(--color-surface)] border border-[var(--color-graphite)] hover:bg-[var(--color-graphite)]/50 text-[var(--color-bright-gray)] text-[16px] font-medium rounded-[8px] transition-colors shadow-[var(--shadow-subtle)]"
             >
-              Tool Comparisons
-            </Link>
-
-            <Link
-              href="/howto"
-              className="px-6 py-3 border border-purple-500/30 hover:border-purple-400/60 bg-slate-800/50 backdrop-blur-sm hover:bg-slate-800 text-gray-100 font-semibold rounded-lg transition-all hover:-translate-y-1 duration-200"
-            >
-              How-To Guides
+              Explore Tools
             </Link>
           </div>
         </div>
       </section>
 
       {/* ── Latest Articles Section ────────────────────────── */}
-      <section className="py-16 md:py-20">
+      <section className="py-16 md:py-20 border-t border-[var(--color-graphite)]">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-12 gap-4">
           <div>
-            <h2 className="text-4xl font-black text-white">
+            <h2 className="text-[28px] font-semibold text-[var(--color-bright-gray)] tracking-[-0.56px]">
               Latest Articles
             </h2>
-            <p className="text-gray-400 mt-2 text-lg">
-              Fresh tutorials straight from the keyboard
+            <p className="text-[var(--color-medium-gray)] mt-2 text-[16px]">
+              Fresh tutorials straight from the keyboard.
             </p>
           </div>
 
           <Link
             href="/blog"
-            className="px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 hover:from-blue-500/30 hover:to-purple-500/30 border border-blue-500/30 text-blue-300 font-semibold rounded-lg transition-all hover:translate-x-1 duration-200 flex items-center gap-2 whitespace-nowrap"
+            className="px-4 py-2 bg-[var(--color-surface)] shadow-[var(--shadow-subtle)] hover:bg-[var(--color-graphite)]/30 text-[var(--color-bright-gray)] font-medium rounded-[8px] transition-colors text-[14px]"
           >
             View all
-            <span className="transition-transform group-hover:translate-x-1">→</span>
           </Link>
         </div>
 
         {posts?.length === 0 ? (
-          <div className="text-center py-20 border border-dashed border-blue-500/20 rounded-xl bg-slate-800/30 backdrop-blur-sm">
-            <p className="text-gray-400 text-lg font-medium">
+          <div className="text-center py-20 bg-[var(--color-surface)] shadow-[var(--shadow-subtle)] rounded-[12px]">
+            <p className="text-[var(--color-medium-gray)] text-[16px] font-medium">
               No articles published yet. Publish some posts in Sanity Studio to see them here!
             </p>
           </div>

@@ -54,21 +54,21 @@ export default function SearchBar({ posts }) {
         type='text'
         value={query}
         onChange={handleChange}
-        placeholder='Search articles...'
-        className='w-full bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg px-4 py-2.5 text-sm text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors'
+        placeholder='Search knowledge base...'
+        className='w-full bg-[var(--color-surface)] shadow-[var(--shadow-subtle)] rounded-[8px] px-4 py-2.5 text-[14px] text-[var(--color-bright-gray)] placeholder-[var(--color-muted-gray)] focus:outline-none focus:ring-2 focus:ring-[var(--color-amethyst)] transition-shadow'
       />
       {open && (
-        <ul className='absolute top-full left-0 mt-1 w-full bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-800 rounded-lg shadow-lg dark:shadow-black/50 z-50 overflow-hidden divide-y divide-gray-100 dark:divide-zinc-800'>
+        <ul className='absolute top-full left-0 mt-2 w-full bg-[var(--color-surface)] shadow-[var(--shadow-xl)] shadow-[var(--shadow-subtle-3)] rounded-[8px] z-50 overflow-hidden divide-y divide-[var(--color-graphite)]'>
           {results.map(({ item }) => (
             <li key={getSlug(item)}>
               <Link
                 href={`/blog/${getSlug(item)}`}
                 onClick={() => { setQuery(''); setOpen(false) }}
-                className='flex flex-col px-4 py-3 hover:bg-gray-50 dark:hover:bg-zinc-800/50 transition-colors'>
-                <span className='text-sm font-medium text-gray-900 dark:text-gray-100'>
+                className='flex flex-col px-4 py-3 hover:bg-[var(--color-graphite)]/30 transition-colors'>
+                <span className='text-[14px] font-medium text-[var(--color-bright-gray)]'>
                   {item.title}
                 </span>
-                <span className='text-xs text-gray-400 dark:text-gray-500 mt-0.5 line-clamp-1'>
+                <span className='text-[12px] text-[var(--color-medium-gray)] mt-1 line-clamp-1'>
                   {item.brief}
                 </span>
               </Link>
