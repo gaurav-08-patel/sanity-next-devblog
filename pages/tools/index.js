@@ -84,7 +84,7 @@ export default function Tools({ posts }) {
             </div>
 
             <div className="w-full max-w-full mt-6">
-                <AdUnit slot="2084495010" />
+                <AdUnit slot="8167787711" />
             </div>
 
             <div className="flex flex-col gap-6 mt-10 mb-5">
