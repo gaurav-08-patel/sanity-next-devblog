@@ -24,19 +24,22 @@ export default function Layout({ children, title, description, image, canonical 
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <header className='sticky top-0 z-50 bg-[var(--color-abyss)] border-b border-[var(--color-graphite)]'>
-        <nav className='max-w-[1120px] mx-auto px-8 sm:px-12 lg:px-16 py-5 flex items-center justify-between'>
+      <header className='sticky top-0 z-50 bg-[var(--color-abyss)]/80 backdrop-blur-md border-b border-[var(--color-graphite)]/50'>
+        {/* Decorative Bottom Glow */}
+        <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--color-amethyst)] to-transparent opacity-30"></div>
+
+        <nav className='relative max-w-[1120px] mx-auto px-8 sm:px-12 lg:px-16 py-5 flex items-center justify-between z-10'>
           <div className="flex items-center gap-3">
-            {/* Minimalist Logo mimicking the app icon style */}
-            <div className="w-8 h-8 rounded-[8px] bg-gradient-to-br from-[var(--color-amethyst)] to-[var(--color-surface)] shadow-[var(--shadow-subtle)] flex items-center justify-center">
-              <span className="text-[var(--color-white)] font-bold text-lg leading-none">D</span>
+            {/* Premium Logo */}
+            <div className="w-8 h-8 rounded-[8px] bg-gradient-to-br from-[var(--color-amethyst)] to-[#581c87] shadow-[0_0_15px_rgba(124,58,237,0.3)] flex items-center justify-center border border-[#a78bfa]/30">
+              <span className="text-[var(--color-white)] font-bold text-lg leading-none drop-shadow-md">D</span>
             </div>
-            <Link href='/' className='font-bold text-lg text-[var(--color-bright-gray)] hover:opacity-80 transition-opacity'>
+            <Link href="/" className="font-bold text-xl text-[var(--color-bright-gray)] tracking-tight">
               DevBlog
             </Link>
           </div>
 
-          <div className='hidden md:flex gap-12 text-[15px] text-[var(--color-medium-gray)] font-medium'>
+          <div className='hidden md:flex gap-12 text-[15px] text-[var(--color-medium-gray)] font-bold'>
             <Link href='/blog' className='relative group hover:text-[var(--color-bright-gray)] py-1 transition-colors duration-200'>
               Articles
               <span className='absolute bottom-0 left-0 w-0 h-0.5 bg-[var(--color-amethyst)] shadow-[0_0_8px_var(--color-amethyst)] group-hover:w-full transition-all duration-300'></span>
@@ -71,15 +74,15 @@ export default function Layout({ children, title, description, image, canonical 
         </nav>
 
         {/* Mobile Dropdown Menu */}
-        <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-[var(--color-surface)] ${isMobileMenuOpen ? 'max-h-[400px] opacity-100 border-t border-[var(--color-graphite)]' : 'max-h-0 opacity-0'}`}>
+        <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out bg-[var(--color-abyss)]/95 backdrop-blur-xl ${isMobileMenuOpen ? 'max-h-[400px] opacity-100 border-t border-[var(--color-graphite)]/50 shadow-[0_10px_30px_rgba(0,0,0,0.5)]' : 'max-h-0 opacity-0'}`}>
           <div className="flex flex-col px-8 py-6 space-y-6">
-            <Link href='/blog' onClick={() => setIsMobileMenuOpen(false)} className='text-[18px] text-[var(--color-bright-gray)] font-medium hover:text-[var(--color-lavender)] transition-colors'>
+            <Link href='/blog' onClick={() => setIsMobileMenuOpen(false)} className='text-[18px] text-[var(--color-bright-gray)] font-bold hover:text-[var(--color-lavender)] transition-colors'>
               Articles
             </Link>
-            <Link href='/tools' onClick={() => setIsMobileMenuOpen(false)} className='text-[18px] text-[var(--color-bright-gray)] font-medium hover:text-[var(--color-lavender)] transition-colors'>
+            <Link href='/tools' onClick={() => setIsMobileMenuOpen(false)} className='text-[18px] text-[var(--color-bright-gray)] font-bold hover:text-[var(--color-lavender)] transition-colors'>
               Tools
             </Link>
-            <Link href='/howto' onClick={() => setIsMobileMenuOpen(false)} className='text-[18px] text-[var(--color-bright-gray)] font-medium hover:text-[var(--color-lavender)] transition-colors'>
+            <Link href='/howto' onClick={() => setIsMobileMenuOpen(false)} className='text-[18px] text-[var(--color-bright-gray)] font-bold hover:text-[var(--color-lavender)] transition-colors'>
               How-To
             </Link>
           </div>
