@@ -117,3 +117,29 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-medium-gray);
 }
+
+/* Custom text selection to match the site's theme */
+::selection,
+::-moz-selection {
+  background: rgba(124,58,237,0.95); /* var(--color-amethyst) */
+  color: var(--color-white);
+  text-shadow: none;
+}
+
+/* Code and pre blocks: darker selection to preserve contrast */
+pre ::selection,
+code ::selection,
+pre::-moz-selection,
+code::-moz-selection {
+  background: rgba(10,10,10,0.85);
+  color: var(--color-amethyst);
+}
+
+/* Ensure selection works well inside interactive elements */
+a::selection,
+button::selection,
+input::selection,
+textarea::selection {
+  background: rgba(124,58,237,0.9);
+  color: var(--color-white);
+}
