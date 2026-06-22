@@ -89,7 +89,7 @@ export default function Layout({ children, title, description, image, canonical 
         </div>
       </header>
 
-      <main className='flex-grow max-w-[1120px] mx-auto w-full px-8 sm:px-12 lg:px-16 py-12 md:py-24 flex flex-col gap-[96px]'>
+      <main className='flex-grow max-w-[1120px] mx-auto w-full px-8 sm:px-12 lg:px-16 py-12 md:py-24 flex flex-col gap-[9px]'>
         {children}
       </main>
 
