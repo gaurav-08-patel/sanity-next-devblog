@@ -40,16 +40,18 @@ export default function AdUnit({ slot }) {
   if (!adsenseClientId) return null
 
   return (
-    <div className='my-8 flex justify-center'>
-      <ins
-        ref={adRef}
-        className='adsbygoogle'
-        style={{ display: 'block', width: '100%' }}
-        data-ad-client={adsenseClientId}
-        data-ad-slot={slot}
-        data-ad-format='auto'
-        data-full-width-responsive='true'
-      />
+    <div className='my-8 w-full'>
+      <div className='w-full max-w-full'>
+        <ins
+          ref={adRef}
+          className='adsbygoogle block w-full'
+          style={{ display: 'block', width: '100%' }}
+          data-ad-client={adsenseClientId}
+          data-ad-slot={slot}
+          data-ad-format='auto'
+          data-full-width-responsive='true'
+        />
+      </div>
     </div>
   )
 }
