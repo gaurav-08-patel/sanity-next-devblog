@@ -67,7 +67,7 @@ export default function Blog({ posts }) {
             canonical="/blog"
         >
             <div className="max-w-3xl">
-                <h1 className="text-[clamp(2.5rem,4vw,4.5rem)] font-semibold tracking-[-0.05em] text-[var(--color-bright-gray)] leading-[1.02] mb-4">
+                <h1 className="text-[clamp(3.75rem,5vw,6.5rem)] font-extrabold tracking-[-0.06em] bg-gradient-to-r from-[var(--color-amethyst)] via-[var(--color-lavender)] to-[var(--color-white)] bg-clip-text text-transparent leading-[0.98] mb-4 drop-shadow-[0_10px_30px_rgba(124,58,237,0.22)]">
                     All Articles
                 </h1>
                 <p className="text-[16px] md:text-[18px] text-[var(--color-medium-gray)] max-w-2xl leading-[1.8] mb-6">
